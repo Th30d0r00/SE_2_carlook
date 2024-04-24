@@ -7,6 +7,18 @@ public class UserDTO {
 	private String password;
 	private String gebDatum;
 	private String address;
+	private String country;
+
+
+
+	private UserDTO(UserBuilder userBuilder) {
+		this.name = userBuilder.name;
+		this.userID = userBuilder.userID;
+		this.password = userBuilder.password;
+		this.gebDatum = userBuilder.gebDatum;
+		this.address = userBuilder.address;
+		this.country = userBuilder.country;
+	}
 	
 	public String getName() {
 		return name;
@@ -80,6 +92,35 @@ public class UserDTO {
 		} else if (!userID.equals(other.userID))
 			return false;
 		return true;
+	}
+
+	public static class UserBuilder {
+
+		private String name;
+		private String userID;
+		private String password;
+		private String gebDatum;
+		private String address;
+		private String country;
+
+		//Pflicht Attribute
+		public UserBuilder(String name, String userID, String password, String gebDatum, String address) {
+			this.name = name;
+			this.userID =
+			this.password = password;
+			this.gebDatum = gebDatum;
+			this.address = address;
+		}
+
+		//Optionale Attribute
+		public UserBuilder Country(String country) {
+			this.country = country;
+			return this;
+		}
+
+		public UserDTO build() {
+			return new UserDTO(this);
+		}
 	}
 
 }
